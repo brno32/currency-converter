@@ -1,5 +1,8 @@
 import express from "express";
 
+// import { port } from './config/config';
+const { port } = require("./config");
+
 const app: express.Application = express();
 
 app.get("/", (req, res) => {
@@ -8,7 +11,7 @@ app.get("/", (req, res) => {
 app.use("/api/convert", require("./routes/convert"));
 app.use("/api/stats", require("./routes/stats"));
 
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
