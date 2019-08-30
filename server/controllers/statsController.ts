@@ -16,6 +16,7 @@ const statsController = async (req: express.Request, res: express.Response) => {
     if (data != undefined) destCurrs[data.to] = destCurrs[data.to] + 1 || 0;
   });
 
+  // Calculate the most frequently converted currency
   let top_dest_currency: any = Object.keys(destCurrs).reduce((max, current) =>
     destCurrs[max] > destCurrs[current] ? max : current
   );

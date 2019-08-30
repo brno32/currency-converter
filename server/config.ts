@@ -16,7 +16,10 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-export const API_KEY = process.env.API_KEY;
+export const API_ID = process.env.API_ID;
 export const PORT = process.env.PORT;
+
+export const baseCurrency = process.env.BASE;
+export const ratesEndpoint = "https://openexchangerates.org/api/latest.json";
 
 export default db;
