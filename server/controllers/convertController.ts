@@ -1,7 +1,7 @@
 import express from "express";
 import { validationResult, ValidationError, Result } from "express-validator";
 
-const { firebase_db } = require("../config");
+import db from "../config";
 
 const convertController = (req: express.Request, res: express.Response) => {
   const errors: Result<ValidationError> = validationResult(req);
@@ -13,7 +13,7 @@ const convertController = (req: express.Request, res: express.Response) => {
   let from: string = req.query.from;
   let to: string = req.query.to;
 
-  firebase_db.collection("conversions").add({
+  db.collection("conversions").add({
     amount: amount,
     from: from,
     to: to

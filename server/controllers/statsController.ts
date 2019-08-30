@@ -1,14 +1,12 @@
 import express from "express";
 
-const { firebase_db } = require("../config");
+import db from "../config";
 
 type QuerySnapshot = import("firebase").firestore.QuerySnapshot;
 type DocumentSnapshot = import("firebase").firestore.DocumentSnapshot;
 
 const statsController = async (req: express.Request, res: express.Response) => {
-  let documents: QuerySnapshot = await firebase_db
-    .collection("conversions")
-    .get();
+  let documents: QuerySnapshot = await db.collection("conversions").get();
 
   let destCurrs: { [currency: string]: number } = {};
 
