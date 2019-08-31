@@ -1,7 +1,9 @@
 import React from "react";
 
+import Navbar from "./components/layout/Navbar";
+
 const App: React.FC = () => {
-  return <div className="App">Client</div>;
+  return <Navbar />;
 };
 
 export default App;
