@@ -4,7 +4,8 @@ import CurrencySelect from "./CurrencySelect";
 const ConvertForm = () => {
   return (
     <div>
-      <CurrencySelect />
+      <CurrencySelect placeholder="Starting currency" />
+      <CurrencySelect placeholder="Target currency" />
     </div>
   );
 };

@@ -9,9 +9,13 @@ interface CurrencyOption {
   value: string;
 }
 
+interface Props {
+  placeholder: string;
+}
+
 const currenciesEndpoint = "https://openexchangerates.org/api/currencies.json";
 
-const CurrencySelect = () => {
+const CurrencySelect = (props: Props) => {
   const [selectedCurrency, setSelectedCurrency] = useState<
     ValueType<CurrencyOption>
   >({
@@ -42,10 +46,9 @@ const CurrencySelect = () => {
   return (
     <div>
       <AsyncSelect
-        placeholder="Search a country"
+        placeholder={props.placeholder}
         loadOptions={currencyOptions}
         onChange={onChange}
-        value={selectedCurrency}
       />
     </div>
   );
