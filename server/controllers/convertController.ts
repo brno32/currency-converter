@@ -18,7 +18,7 @@ const convertController = async (
     return res.status(400).json({ errors: errors.array() });
   }
 
-  let amount: number = +req.query.amount; // cast to number
+  let fromAmount: number = +req.query.amount; // cast to number
   let from: string = req.query.from;
   let to: string = req.query.to;
 
@@ -30,9 +30,32 @@ const convertController = async (
     }
   });
 
-  const data = ratesResults.data;
+  const data: CurrencyData = ratesResults.data;
 
-  let baseAmount = amount / data.rates[from];
+  // Validate input values are recognized by the external API
+  let currencyTypeErrors = [];
+  if (!(from in data.rates)) {
+    currencyTypeErrors.push({
+      msg: `${from} is not a valid currency`,
+      param: "from",
+      location: "query"
+    });
+  }
+  if (!(to in data.rates)) {
+    currencyTypeErrors.push({
+      msg: `${to} is not a valid currency`,
+      param: "to",
+      location: "query"
+    });
+  }
+
+  if (currencyTypeErrors.length > 0) {
+    return res.status(400).json({ errors: currencyTypeErrors });
+  }
+
+  // Get base currency
+  let baseAmount = fromAmount / data.rates[from];
+  // Convert base currency to targer currency
   let toAmount = baseAmount * data.rates[to];
 
   // Log this request to firebase for statistics tracking
@@ -44,7 +67,7 @@ const convertController = async (
 
   // send relevant data back to user
   res.json({
-    fromAmount: amount,
+    fromAmount: fromAmount,
     toAmount: toAmount,
     from: from,
     to: to
