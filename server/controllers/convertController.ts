@@ -4,10 +4,16 @@ import axios, { AxiosResponse } from "axios";
 
 import db, { ratesEndpoint, API_ID, baseCurrency } from "../config";
 
+interface CustomError {
+  msg: string;
+  param: string;
+  location: string;
+}
 interface CurrencyData {
   base: string;
-  rates: { [currency: string]: number };
+  rates: rates;
 }
+type rates = { [currency: string]: number };
 
 const convertController = async (
   req: express.Request,
@@ -33,21 +39,7 @@ const convertController = async (
   const data: CurrencyData = ratesResults.data;
 
   // Validate input values are recognized by the external API
-  let currencyTypeErrors = [];
-  if (!(from in data.rates)) {
-    currencyTypeErrors.push({
-      msg: `${from} is not a valid currency`,
-      param: "from",
-      location: "query"
-    });
-  }
-  if (!(to in data.rates)) {
-    currencyTypeErrors.push({
-      msg: `${to} is not a valid currency`,
-      param: "to",
-      location: "query"
-    });
-  }
+  const currencyTypeErrors = checkCurrencyTypes(from, to, data.rates);
 
   if (currencyTypeErrors.length > 0) {
     return res.status(400).json({ errors: currencyTypeErrors });
@@ -72,6 +64,30 @@ const convertController = async (
     from: from,
     to: to
   });
+};
+
+// Helper methods
+const checkCurrencyTypes = (
+  fromCur: string,
+  toCur: string,
+  rates: rates
+): CustomError[] => {
+  let currencyTypeErrors: CustomError[] = [];
+  if (!(fromCur in rates)) {
+    currencyTypeErrors.push({
+      msg: `${fromCur} is not a valid currency`,
+      param: "from",
+      location: "query"
+    });
+  }
+  if (!(toCur in rates)) {
+    currencyTypeErrors.push({
+      msg: `${toCur} is not a valid currency`,
+      param: "to",
+      location: "query"
+    });
+  }
+  return currencyTypeErrors;
 };
 
 export default convertController;
