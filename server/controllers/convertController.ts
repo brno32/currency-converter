@@ -2,7 +2,7 @@ import express from "express";
 import { validationResult, ValidationError, Result } from "express-validator";
 import axios, { AxiosResponse } from "axios";
 
-import db, { ratesEndpoint, API_ID, baseCurrency } from "../config";
+import db, { ratesEndpoint, EXCHANGE_API_ID, BASE_CURRENCY } from "../config";
 
 interface CustomError {
   msg: string;
@@ -30,9 +30,9 @@ const convertController = async (
 
   const ratesResults: AxiosResponse = await axios.get(`${ratesEndpoint}`, {
     params: {
-      app_id: API_ID,
-      base: baseCurrency,
-      symbols: `${from},${to},${baseCurrency}`
+      app_id: EXCHANGE_API_ID,
+      base: BASE_CURRENCY,
+      symbols: `${from},${to},${BASE_CURRENCY}`
     }
   });
 
@@ -40,7 +40,6 @@ const convertController = async (
 
   // Validate input values are recognized by the external API
   const currencyTypeErrors = findCurrencyTypeErrors(from, to, data.rates);
-
   if (currencyTypeErrors.length > 0) {
     return res.status(400).json({ errors: currencyTypeErrors });
   }
