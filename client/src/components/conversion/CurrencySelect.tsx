@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
+import { ValueType } from "react-select/src/types";
+
 import axios from "axios";
 
-interface OptionType {
+interface CurrencyOption {
   label: string;
   value: string;
 }
@@ -10,10 +12,17 @@ interface OptionType {
 const currenciesEndpoint = "https://openexchangerates.org/api/currencies.json";
 
 const CurrencySelect = () => {
+  const [selectedCurrency, setSelectedCurrency] = useState<
+    ValueType<CurrencyOption>
+  >({
+    label: "",
+    value: ""
+  });
+
   const currencyOptions = async (inputValue: string) => {
     const results = await axios.get(currenciesEndpoint);
 
-    let options: OptionType[] = [];
+    let options: CurrencyOption[] = [];
     for (let currency in results.data) {
       options.push({
         value: currency,
@@ -21,9 +30,13 @@ const CurrencySelect = () => {
       });
     }
 
-    return options.filter((country: OptionType) => {
+    return options.filter((country: CurrencyOption) => {
       return country.label.toLowerCase().includes(inputValue.toLowerCase());
     });
+  };
+
+  const onChange = (selectedOption: ValueType<CurrencyOption>) => {
+    setSelectedCurrency(selectedOption);
   };
 
   return (
@@ -31,6 +44,8 @@ const CurrencySelect = () => {
       <AsyncSelect
         placeholder="Search a country"
         loadOptions={currencyOptions}
+        onChange={onChange}
+        value={selectedCurrency}
       />
     </div>
   );
