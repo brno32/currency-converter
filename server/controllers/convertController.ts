@@ -54,9 +54,9 @@ const convertController = async (
   }
 
   // Get base currency
-  let baseAmount = fromAmount / data.rates[from];
+  let baseAmount: number = fromAmount / data.rates[from];
   // Convert base currency to targer currency
-  let toAmount = baseAmount * data.rates[to];
+  let toAmount: number = baseAmount * data.rates[to];
 
   // Log this request to firebase for statistics tracking
   db.collection("conversions").add({
