@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "start": "tsc && node ./dist/server.js",
     "start-dev": "ts-node-dev --respawn --transpileOnly ./server/server.ts",
-    "test": "mocha -r ts-node/register server/**/*.spec.ts  --exit"
+    "test": "mocha -r ts-node/register server/test/server.spec.ts  --exit"
   },
   "repository": {
     "type": "git",

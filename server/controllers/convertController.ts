@@ -39,7 +39,7 @@ const convertController = async (
   const data: CurrencyData = ratesResults.data;
 
   // Validate input values are recognized by the external API
-  const currencyTypeErrors = checkCurrencyTypes(from, to, data.rates);
+  const currencyTypeErrors = findCurrencyTypeErrors(from, to, data.rates);
 
   if (currencyTypeErrors.length > 0) {
     return res.status(400).json({ errors: currencyTypeErrors });
@@ -67,7 +67,7 @@ const convertController = async (
 };
 
 // Helper methods
-export const checkCurrencyTypes = (
+export const findCurrencyTypeErrors = (
   fromCur: string,
   toCur: string,
   rates: rates

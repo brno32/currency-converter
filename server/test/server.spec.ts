@@ -2,7 +2,9 @@ import express from "express";
 import request from "supertest";
 import { expect } from "chai";
 
-describe("Server", () => {
+import { findCurrencyTypeErrors } from "../controllers/convertController";
+
+describe("Express server", () => {
   let app: express.Application;
   let server: import("http").Server;
 
@@ -71,5 +73,16 @@ describe("Server", () => {
         }
         done();
       });
+  });
+});
+
+describe("convertController helper methods", () => {
+  it("should be empty if currencies to convert are in the rates", () => {
+    expect(findCurrencyTypeErrors("USD", "CZK", { USD: 1, CZK: 23 })).to.empty;
+  });
+
+  it("should not be empty if currencies to convert are in the rates", () => {
+    expect(findCurrencyTypeErrors("USD", "CZK", { USD: 1, CZZ: 23 })).to.not
+      .empty;
   });
 });
