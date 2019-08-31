@@ -67,7 +67,7 @@ const convertController = async (
 };
 
 // Helper methods
-const checkCurrencyTypes = (
+export const checkCurrencyTypes = (
   fromCur: string,
   toCur: string,
   rates: rates
