@@ -10,6 +10,7 @@ interface CurrencyOption {
 
 interface Props {
   placeholder: string;
+  className: string;
   onSelect: (currency: string) => void;
 }
 
@@ -43,13 +44,12 @@ const CurrencySelect = (props: Props) => {
   };
 
   return (
-    <div>
-      <AsyncSelect
-        placeholder={props.placeholder}
-        loadOptions={currencyOptions}
-        onChange={onChange}
-      />
-    </div>
+    <AsyncSelect
+      placeholder={props.placeholder}
+      loadOptions={currencyOptions}
+      onChange={onChange}
+      className={props.className}
+    />
   );
 };
 

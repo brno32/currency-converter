@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
     textField: {
       margin: theme.spacing(1)
     },
+    select: {
+      marginTop: theme.spacing(1)
+    },
     button: {
       margin: theme.spacing(1)
     }
@@ -87,10 +90,12 @@ const ConvertForm = () => {
         <CurrencySelect
           placeholder="Starting currency"
           onSelect={onStartSelect}
+          className={classes.select}
         />
         <CurrencySelect
           placeholder="Target currency"
           onSelect={onTargetSelect}
+          className={classes.select}
         />
         <Button
           variant="contained"

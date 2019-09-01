@@ -4,7 +4,13 @@ import ConversionContext from "./conversionContext";
 import conversionReducer from "./conversionReducer";
 import { GET_CONVERSION, GET_STATS } from "../types";
 
-const ConversionState = (props: any) => {
+interface Conversion {
+  amount: number | null;
+  start: string | null;
+  target: string | null;
+}
+
+const ConversionState = (props: React.ComponentProps<any>) => {
   const initialState = {
     start: null,
     target: null,
@@ -18,7 +24,7 @@ const ConversionState = (props: any) => {
   const [state, dispatch] = useReducer(conversionReducer, initialState);
 
   // Get Conversions
-  const getConversions = async (params: any) => {
+  const getConversions = async (params: Conversion) => {
     try {
       let results = await axios.get("/api/convert", {
         params: {

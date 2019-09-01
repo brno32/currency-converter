@@ -1,5 +1,5 @@
 import { createContext } from "react";
 
-const conversionContext: any = createContext({});
+const conversionContext = createContext({});
 
 export default conversionContext;
