@@ -1,11 +1,5 @@
 import { GET_CONVERSION } from "../types";
-
-export interface State {
-  start: string | null;
-  target: string | null;
-  amount: number | null;
-  result: number | null;
-}
+import { State } from "./conversionContext";
 
 type Action = {
   type: "GET_CONVERSION";

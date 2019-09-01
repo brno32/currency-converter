@@ -1,23 +1,13 @@
 import React, { useReducer } from "react";
 import axios from "axios";
-import ConversionContext from "./conversionContext";
-import conversionReducer, { State } from "./conversionReducer";
-import { GET_CONVERSION, GET_STATS } from "../types";
-
-interface Conversion {
-  amount: number;
-  start: string;
-  target: string;
-}
+import ConversionContext, {
+  Conversion,
+  initialState
+} from "./conversionContext";
+import conversionReducer from "./conversionReducer";
+import { GET_CONVERSION } from "../types";
 
 const ConversionState = (props: React.ComponentProps<any>) => {
-  const initialState: State = {
-    start: null,
-    target: null,
-    amount: null,
-    result: null
-  };
-
   const [state, dispatch] = useReducer(conversionReducer, initialState);
 
   const getConversions = async (params: Conversion) => {

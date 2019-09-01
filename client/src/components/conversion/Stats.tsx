@@ -19,7 +19,7 @@ const Stats = () => {
 
   return (
     <div>
-      Total converted:{" "}
+      Total converted:<span> </span>
       <strong>
         {totalAmount.toFixed(2)} {totalAmountUnit}
       </strong>
