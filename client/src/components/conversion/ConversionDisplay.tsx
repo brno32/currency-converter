@@ -1,9 +1,7 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
@@ -35,7 +33,7 @@ const ConversionDisplay = (props: Props) => {
           {props.result.toFixed(2)}
         </Typography>
         <Typography variant="body2" component="p">
-          From {props.amount} {props.start} to {props.target}
+          From {props.start} to {props.target}
         </Typography>
       </CardContent>
     </Card>
