@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from "react";
 
-import ConversionContext from "../../context/conversion/conversionContext";
+import StatsContext from "../../context/stats/statsContext";
 
 const Stats = () => {
-  const conversionContext: any = useContext(ConversionContext);
+  const conversionContext: any = useContext(StatsContext);
   const {
     totalAmount,
     totalAmountUnit,

@@ -15,16 +15,11 @@ const ConversionState = (props: React.ComponentProps<any>) => {
     start: null,
     target: null,
     amount: null,
-    result: null,
-    totalAmount: 0,
-    totalAmountUnit: null,
-    numConversions: 0,
-    mostPopular: null
+    result: null
   };
 
   const [state, dispatch] = useReducer(conversionReducer, initialState);
 
-  // Get Conversions
   const getConversions = async (params: Conversion) => {
     try {
       let results = await axios.get("/api/convert", {
@@ -40,15 +35,6 @@ const ConversionState = (props: React.ComponentProps<any>) => {
     }
   };
 
-  const getStats = async () => {
-    try {
-      let results = await axios.get("/api/stats");
-      dispatch({ type: GET_STATS, payload: results.data });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <ConversionContext.Provider
       value={{
@@ -56,12 +42,7 @@ const ConversionState = (props: React.ComponentProps<any>) => {
         target: state.target,
         amount: state.amount,
         result: state.result,
-        totalAmount: state.totalAmount,
-        totalAmountUnit: state.totalAmountUnit,
-        numConversions: state.numConversions,
-        mostPopular: state.mostPopular,
-        getConversions,
-        getStats
+        getConversions
       }}
     >
       {props.children}

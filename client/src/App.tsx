@@ -5,23 +5,26 @@ import Navbar from "./components/layout/Navbar";
 import Main from "./components/pages/Main";
 import About from "./components/pages/About";
 
+import StatsState from "./context/stats/StatsState";
 import ConversionState from "./context/conversion/ConversionState";
 
 import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <ConversionState>
-      <Router>
-        <Navbar />
-        <div>
-          <Switch>
-            <Route exact path="/" component={Main} />
-            <Route exact path="/about" component={About} />
-          </Switch>
-        </div>
-      </Router>
-    </ConversionState>
+    <StatsState>
+      <ConversionState>
+        <Router>
+          <Navbar />
+          <div>
+            <Switch>
+              <Route exact path="/" component={Main} />
+              <Route exact path="/about" component={About} />
+            </Switch>
+          </div>
+        </Router>
+      </ConversionState>
+    </StatsState>
   );
 };
 

@@ -5,6 +5,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import CurrencySelect from "./CurrencySelect";
 import ConversionContext from "../../context/conversion/conversionContext";
+import StatsContext from "../../context/stats/statsContext";
 
 interface FormState {
   amount: number | null;
@@ -26,7 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ConvertForm = () => {
   const conversionContext: any = useContext(ConversionContext);
-  const { getConversions, getStats } = conversionContext;
+  const { getConversions } = conversionContext;
+
+  const statsContext: any = useContext(StatsContext);
+  const { getStats } = statsContext;
 
   const classes = useStyles();
   const [state, setState] = React.useState<FormState>({
