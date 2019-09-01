@@ -8,7 +8,7 @@ interface CurrencyOption {
   value: string;
 }
 
-interface Props {
+interface SelectProps {
   placeholder: string;
   className: string;
   onSelect: (currency: string) => void;
@@ -16,10 +16,9 @@ interface Props {
 
 const currenciesEndpoint = "https://openexchangerates.org/api/currencies.json";
 
-const CurrencySelect = (props: Props) => {
+const CurrencySelect = (props: SelectProps) => {
   // Filter results from API based on user input
-  // Inefficient since we're grabbing ALL results in the response, but openexchange doesn't support
-  // pagination or query params
+  // Inefficient since ALL results are in the response, but openexchange doesn't support pagination or query params
   const currencyOptions = async (inputValue: string) => {
     const results = await axios.get(currenciesEndpoint);
 
@@ -37,7 +36,6 @@ const CurrencySelect = (props: Props) => {
   };
 
   // Send chosen value up to parent through callback
-  // If this form ever gets more complex, it should get its own context so we can avoid prop mining
   const onChange = (selectedOption: any) => {
     if (selectedOption == null) return;
     props.onSelect(selectedOption.value);

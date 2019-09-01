@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
@@ -78,35 +77,33 @@ const ConvertForm = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <form onSubmit={onSubmit}>
-        <TextField
-          required
-          label="Amount"
-          type="number"
-          className={classes.textField}
-          onChange={onTextChange}
-        ></TextField>
-        <CurrencySelect
-          placeholder="Starting currency"
-          onSelect={onStartSelect}
-          className={classes.select}
-        />
-        <CurrencySelect
-          placeholder="Target currency"
-          onSelect={onTargetSelect}
-          className={classes.select}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          type="submit"
-        >
-          Convert
-        </Button>
-      </form>
-    </Container>
+    <form onSubmit={onSubmit}>
+      <TextField
+        required
+        label="Amount"
+        type="number"
+        className={classes.textField}
+        onChange={onTextChange}
+      ></TextField>
+      <CurrencySelect
+        placeholder="Starting currency"
+        onSelect={onStartSelect}
+        className={classes.select}
+      />
+      <CurrencySelect
+        placeholder="Target currency"
+        onSelect={onTargetSelect}
+        className={classes.select}
+      />
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        type="submit"
+      >
+        Convert
+      </Button>
+    </form>
   );
 };
 

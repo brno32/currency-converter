@@ -1,6 +1,16 @@
 import { GET_CONVERSION, GET_STATS } from "../types";
 
-export default (state: any, action: any) => {
+export interface State {
+  start: string | null;
+  target: string | null;
+  amount: number | null;
+  result: number | null;
+  totalAmount: number | null;
+  numConversions: number | null;
+  mostPopular: string | null;
+}
+
+export default (state: State, action: any) => {
   switch (action.type) {
     case GET_CONVERSION:
       return {

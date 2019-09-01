@@ -1,17 +1,17 @@
 import React, { useReducer } from "react";
 import axios from "axios";
 import ConversionContext from "./conversionContext";
-import conversionReducer from "./conversionReducer";
+import conversionReducer, { State } from "./conversionReducer";
 import { GET_CONVERSION, GET_STATS } from "../types";
 
 interface Conversion {
-  amount: number | null;
-  start: string | null;
-  target: string | null;
+  amount: number;
+  start: string;
+  target: string;
 }
 
 const ConversionState = (props: React.ComponentProps<any>) => {
-  const initialState = {
+  const initialState: State = {
     start: null,
     target: null,
     amount: null,
