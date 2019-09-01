@@ -6,6 +6,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import axios from "axios";
 
 import CurrencySelect from "./CurrencySelect";
+import ConversionDisplay from "./ConversionDisplay";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,10 +28,11 @@ const ConvertForm = () => {
   const [state, setState] = React.useState<any>({
     amount: "",
     start: "",
-    target: ""
+    target: "",
+    result: ""
   });
 
-  const { amount, start, target } = state;
+  const { amount, start, target, result } = state;
 
   const onStartSelect = (currency: string) => {
     setState({ ...state, start: currency });
@@ -47,7 +49,7 @@ const ConvertForm = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (start == "" || target == "") return;
+    if (start === "" || target === "") return;
 
     let results = await axios.get("/api/convert", {
       params: {
@@ -55,6 +57,13 @@ const ConvertForm = () => {
         to: target,
         amount: amount
       }
+    });
+
+    console.log(results.data);
+
+    setState({
+      ...state,
+      result: results.data.toAmount
     });
   };
 
@@ -85,6 +94,14 @@ const ConvertForm = () => {
           Convert
         </Button>
       </form>
+      {result && (
+        <ConversionDisplay
+          amount={amount}
+          result={result}
+          start={start}
+          target={target}
+        />
+      )}
     </Container>
   );
 };
