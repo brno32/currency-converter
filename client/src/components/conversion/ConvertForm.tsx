@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import axios from "axios";
 
 import CurrencySelect from "./CurrencySelect";
 
@@ -43,16 +44,25 @@ const ConvertForm = () => {
     setState({ ...state, amount: event.target.value });
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Send
+    if (start == "" || target == "") return;
+
+    let results = await axios.get("/api/convert", {
+      params: {
+        from: start,
+        to: target,
+        amount: amount
+      }
+    });
   };
 
   return (
     <Container maxWidth="sm">
       <form onSubmit={onSubmit}>
         <TextField
+          required
           label="Amount"
           type="number"
           className={classes.textField}
