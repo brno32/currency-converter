@@ -3,10 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import axios from "axios";
 
 import CurrencySelect from "./CurrencySelect";
-
 import ConversionContext from "../../context/conversion/conversionContext";
 
 const useStyles = makeStyles((theme: Theme) =>

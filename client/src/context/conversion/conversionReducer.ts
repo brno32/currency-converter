@@ -7,6 +7,13 @@ export default (state: any, action: any) => {
         ...state,
         conversions: action.payload
       };
+    case GET_STATS:
+      return {
+        ...state,
+        totalAmount: action.payload.totalAmount,
+        numConversions: action.payload.numConversions,
+        mostPopular: action.payload.mostPopular
+      };
     default:
       return state;
   }
