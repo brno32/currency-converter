@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ConvertForm = () => {
   const conversionContext: any = useContext(ConversionContext);
-  const { conversions, getConversions } = conversionContext;
+  const { conversions, getConversions, getStats } = conversionContext;
 
   const classes = useStyles();
   const [state, setState] = React.useState<any>({
@@ -58,6 +58,7 @@ const ConvertForm = () => {
       target: target,
       amount: amount
     });
+    getStats();
   };
 
   return (

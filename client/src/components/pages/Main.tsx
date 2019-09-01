@@ -5,12 +5,12 @@ import ConversionContext from "../../context/conversion/conversionContext";
 
 const Main = () => {
   const conversionContext: any = useContext(ConversionContext);
-  const { conversions } = conversionContext;
+  const { result } = conversionContext;
 
   return (
     <div>
       <ConvertForm></ConvertForm>
-      {conversions && <ConversionDisplay />}
+      {result && <ConversionDisplay />}
     </div>
   );
 };

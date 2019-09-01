@@ -24,44 +24,44 @@ const convertController = async (
     return res.status(400).json({ errors: errors.array() });
   }
 
-  let fromAmount: number = +req.query.amount; // cast to number
-  let from: string = req.query.from;
-  let to: string = req.query.to;
+  let amount: number = +req.query.amount; // cast to number
+  let start: string = req.query.from;
+  let target: string = req.query.to;
 
   const ratesResults: AxiosResponse = await axios.get(`${ratesEndpoint}`, {
     params: {
       app_id: EXCHANGE_API_ID,
       base: BASE_CURRENCY,
-      symbols: `${from},${to},${BASE_CURRENCY}`
+      symbols: `${start},${target},${BASE_CURRENCY}`
     }
   });
 
   const data: CurrencyData = ratesResults.data;
 
   // Validate input values are recognized by the external API
-  const currencyTypeErrors = findCurrencyTypeErrors(from, to, data.rates);
+  const currencyTypeErrors = findCurrencyTypeErrors(start, target, data.rates);
   if (currencyTypeErrors.length > 0) {
     return res.status(400).json({ errors: currencyTypeErrors });
   }
 
   // Get base currency
-  let baseAmount: number = fromAmount / data.rates[from];
+  let baseAmount: number = amount / data.rates[start];
   // Convert base currency to targer currency
-  let toAmount: number = baseAmount * data.rates[to];
+  let result: number = baseAmount * data.rates[target];
 
   // Log this request to firebase for statistics tracking
   db.collection("conversions").add({
     baseAmount: baseAmount,
-    from: from,
-    to: to
+    from: start,
+    to: target
   });
 
   // send relevant data back to user
   res.json({
-    fromAmount: fromAmount,
-    toAmount: toAmount,
-    from: from,
-    to: to
+    amount: amount,
+    result: result,
+    start: start,
+    target: target
   });
 };
 

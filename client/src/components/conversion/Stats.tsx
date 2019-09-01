@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 
 import ConversionContext from "../../context/conversion/conversionContext";
-
-interface State {
-  total: number;
-  conversions: number;
-  mostPopular: string;
-}
 
 const Stats = () => {
   const conversionContext: any = useContext(ConversionContext);

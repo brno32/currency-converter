@@ -5,7 +5,10 @@ export default (state: any, action: any) => {
     case GET_CONVERSION:
       return {
         ...state,
-        conversions: action.payload
+        start: action.payload.start,
+        target: action.payload.target,
+        amount: action.payload.amount,
+        result: action.payload.result
       };
     case GET_STATS:
       return {

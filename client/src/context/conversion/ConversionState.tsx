@@ -6,7 +6,10 @@ import { GET_CONVERSION, GET_STATS } from "../types";
 
 const ConversionState = (props: any) => {
   const initialState = {
-    conversions: null,
+    start: null,
+    target: null,
+    amount: null,
+    result: null,
     totalAmount: 0,
     numConversions: 0,
     mostPopular: null
@@ -25,9 +28,6 @@ const ConversionState = (props: any) => {
         }
       });
       dispatch({ type: GET_CONVERSION, payload: results.data });
-
-      // Trigger an update to the statistics
-      getStats();
     } catch (error) {
       console.error(error);
     }
@@ -45,7 +45,10 @@ const ConversionState = (props: any) => {
   return (
     <ConversionContext.Provider
       value={{
-        conversions: state.conversions,
+        start: state.start,
+        target: state.target,
+        amount: state.amount,
+        result: state.result,
         totalAmount: state.totalAmount,
         numConversions: state.numConversions,
         mostPopular: state.mostPopular,

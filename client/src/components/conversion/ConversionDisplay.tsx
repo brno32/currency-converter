@@ -20,17 +20,17 @@ const useStyles = makeStyles({
 
 const ConversionDisplay = () => {
   const conversionContext: any = useContext(ConversionContext);
-  const { conversions } = conversionContext;
+  const { start, target, amount, result } = conversionContext;
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography variant="h5" component="h2">
-          {conversions.toAmount.toFixed(2)}
+          {result.toFixed(2)}
         </Typography>
         <Typography variant="body2" component="p">
-          From {conversions.from} to {conversions.to}
+          From {start} to {target}
         </Typography>
       </CardContent>
     </Card>
