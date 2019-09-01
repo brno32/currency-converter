@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
@@ -31,6 +31,9 @@ const ConversionDisplay = () => {
         </Typography>
         <Typography variant="body2" component="p">
           From {start} to {target}
+        </Typography>
+        <Typography variant="body2" component="p">
+          Base amount: {amount}
         </Typography>
       </CardContent>
     </Card>

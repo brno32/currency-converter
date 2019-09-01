@@ -24,17 +24,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ConvertForm = () => {
   const conversionContext: any = useContext(ConversionContext);
-  const { conversions, getConversions, getStats } = conversionContext;
+  const { getConversions, getStats } = conversionContext;
 
   const classes = useStyles();
   const [state, setState] = React.useState<any>({
     amount: "",
     start: "",
-    target: "",
-    result: ""
+    target: ""
   });
 
-  const { amount, start, target, result } = state;
+  const { amount, start, target } = state;
 
   const onStartSelect = (currency: string) => {
     setState({ ...state, start: currency });

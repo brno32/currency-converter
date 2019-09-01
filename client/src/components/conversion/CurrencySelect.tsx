@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import AsyncSelect from "react-select/async";
-import { ValueType } from "react-select/src/types";
 
 import axios from "axios";
 
@@ -17,13 +16,6 @@ interface Props {
 const currenciesEndpoint = "https://openexchangerates.org/api/currencies.json";
 
 const CurrencySelect = (props: Props) => {
-  const [selectedCurrency, setSelectedCurrency] = useState<
-    ValueType<CurrencyOption>
-  >({
-    label: "",
-    value: ""
-  });
-
   const currencyOptions = async (inputValue: string) => {
     const results = await axios.get(currenciesEndpoint);
 
@@ -42,10 +34,6 @@ const CurrencySelect = (props: Props) => {
 
   const onChange = (selectedOption: any) => {
     if (selectedOption == null) return;
-    setSelectedCurrency({
-      label: selectedOption.label,
-      value: selectedOption.value
-    });
     props.onSelect(selectedOption.value);
   };
 
