@@ -7,7 +7,12 @@ export interface State {
   result: number | null;
 }
 
-export default (state: State, action: any) => {
+type Action = {
+  type: "GET_CONVERSION";
+  payload: State;
+};
+
+export default (state: State, action: Action) => {
   switch (action.type) {
     case GET_CONVERSION:
       return {
