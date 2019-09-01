@@ -11,6 +11,7 @@ interface CurrencyOption {
 
 interface Props {
   placeholder: string;
+  onSelect: (currency: string) => void;
 }
 
 const currenciesEndpoint = "https://openexchangerates.org/api/currencies.json";
@@ -39,8 +40,13 @@ const CurrencySelect = (props: Props) => {
     });
   };
 
-  const onChange = (selectedOption: ValueType<CurrencyOption>) => {
-    setSelectedCurrency(selectedOption);
+  const onChange = (selectedOption: any) => {
+    if (selectedOption == null) return;
+    setSelectedCurrency({
+      label: selectedOption.label,
+      value: selectedOption.value
+    });
+    props.onSelect(selectedOption.value);
   };
 
   return (
