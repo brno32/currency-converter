@@ -4,7 +4,9 @@ import Button from "@material-ui/core/Button";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import CurrencySelect from "./CurrencySelect";
-import ConversionContext from "../../context/conversion/conversionContext";
+import ConversionContext, {
+  ConversionState
+} from "../../context/conversion/conversionContext";
 import StatsContext from "../../context/stats/statsContext";
 
 interface FormState {
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ConvertForm = () => {
-  const conversionContext: any = useContext(ConversionContext);
+  const conversionContext: ConversionState = useContext(ConversionContext);
   const { getConversions } = conversionContext;
 
   const statsContext: any = useContext(StatsContext);
@@ -64,11 +66,13 @@ const ConvertForm = () => {
       return;
     }
 
-    getConversions({
-      start: start,
-      target: target,
-      amount: amount
-    });
+    if (getConversions != undefined) {
+      getConversions({
+        start: start,
+        target: target,
+        amount: amount
+      });
+    }
 
     // Trigger fetching of stats
     getStats();

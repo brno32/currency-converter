@@ -7,7 +7,7 @@ import ConversionContext, {
 import conversionReducer from "./conversionReducer";
 import { GET_CONVERSION } from "../types";
 
-const ConversionState = (props: React.ComponentProps<any>) => {
+const ConversionProvider = (props: React.ComponentProps<any>) => {
   const [state, dispatch] = useReducer(conversionReducer, initialState);
 
   const getConversions = async (params: Conversion) => {
@@ -40,4 +40,4 @@ const ConversionState = (props: React.ComponentProps<any>) => {
   );
 };
 
-export default ConversionState;
+export default ConversionProvider;

@@ -6,14 +6,14 @@ import Main from "./components/pages/Main";
 import About from "./components/pages/About";
 
 import StatsState from "./context/stats/StatsState";
-import ConversionState from "./context/conversion/ConversionState";
+import ConversionProvider from "./context/conversion/ConversionProvider";
 
 import "./App.css";
 
 const App: React.FC = () => {
   return (
     <StatsState>
-      <ConversionState>
+      <ConversionProvider>
         <Router>
           <Navbar />
           <div>
@@ -23,7 +23,7 @@ const App: React.FC = () => {
             </Switch>
           </div>
         </Router>
-      </ConversionState>
+      </ConversionProvider>
     </StatsState>
   );
 };
