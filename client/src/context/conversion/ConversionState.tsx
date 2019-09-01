@@ -23,7 +23,7 @@ const ConversionState = (props: any) => {
       });
       dispatch({ type: GET_CONVERSION, payload: results.data });
     } catch (error) {
-      console.error(error.response.msg);
+      console.error(error);
     }
   };
 

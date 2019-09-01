@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
@@ -6,7 +6,8 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import axios from "axios";
 
 import CurrencySelect from "./CurrencySelect";
-import ConversionDisplay from "./ConversionDisplay";
+
+import ConversionContext from "../../context/conversion/conversionContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ConvertForm = () => {
+  const conversionContext: any = useContext(ConversionContext);
+  const { conversions, getConversions } = conversionContext;
+
   const classes = useStyles();
   const [state, setState] = React.useState<any>({
     amount: "",
@@ -51,19 +55,10 @@ const ConvertForm = () => {
 
     if (start === "" || target === "") return;
 
-    let results = await axios.get("/api/convert", {
-      params: {
-        from: start,
-        to: target,
-        amount: amount
-      }
-    });
-
-    console.log(results.data);
-
-    setState({
-      ...state,
-      result: results.data.toAmount
+    getConversions({
+      start: start,
+      target: target,
+      amount: amount
     });
   };
 
@@ -94,14 +89,6 @@ const ConvertForm = () => {
           Convert
         </Button>
       </form>
-      {result && (
-        <ConversionDisplay
-          amount={amount}
-          result={result}
-          start={start}
-          target={target}
-        />
-      )}
     </Container>
   );
 };
