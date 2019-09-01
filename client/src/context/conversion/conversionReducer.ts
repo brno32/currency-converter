@@ -6,6 +6,7 @@ export interface State {
   amount: number | null;
   result: number | null;
   totalAmount: number | null;
+  totalAmountUnit: string | null;
   numConversions: number | null;
   mostPopular: string | null;
 }
@@ -24,6 +25,7 @@ export default (state: State, action: any) => {
       return {
         ...state,
         totalAmount: action.payload.totalAmount,
+        totalAmountUnit: action.payload.totalAmountUnit,
         numConversions: action.payload.numConversions,
         mostPopular: action.payload.mostPopular
       };

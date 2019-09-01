@@ -17,6 +17,7 @@ const ConversionState = (props: React.ComponentProps<any>) => {
     amount: null,
     result: null,
     totalAmount: 0,
+    totalAmountUnit: null,
     numConversions: 0,
     mostPopular: null
   };
@@ -56,6 +57,7 @@ const ConversionState = (props: React.ComponentProps<any>) => {
         amount: state.amount,
         result: state.result,
         totalAmount: state.totalAmount,
+        totalAmountUnit: state.totalAmountUnit,
         numConversions: state.numConversions,
         mostPopular: state.mostPopular,
         getConversions,

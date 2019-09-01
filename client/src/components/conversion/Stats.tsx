@@ -6,6 +6,7 @@ const Stats = () => {
   const conversionContext: any = useContext(ConversionContext);
   const {
     totalAmount,
+    totalAmountUnit,
     numConversions,
     mostPopular,
     getStats
@@ -18,7 +19,10 @@ const Stats = () => {
 
   return (
     <div>
-      Total converted: <strong>${totalAmount.toFixed(2)}</strong>
+      Total converted:{" "}
+      <strong>
+        {totalAmount.toFixed(2)} {totalAmountUnit}
+      </strong>
       <span> | </span>
       Total number of conversion requests: <strong>{numConversions}</strong>
       <span> | </span>

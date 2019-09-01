@@ -18,13 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexWrap: "wrap"
     },
-    textField: {
-      margin: theme.spacing(1)
-    },
-    select: {
-      marginTop: theme.spacing(1)
-    },
-    button: {
+    spaced: {
       margin: theme.spacing(1)
     }
   })
@@ -82,23 +76,23 @@ const ConvertForm = () => {
         required
         label="Amount"
         type="number"
-        className={classes.textField}
+        className={classes.spaced}
         onChange={onTextChange}
       ></TextField>
       <CurrencySelect
         placeholder="Starting currency"
         onSelect={onStartSelect}
-        className={classes.select}
+        className={classes.spaced}
       />
       <CurrencySelect
         placeholder="Target currency"
         onSelect={onTargetSelect}
-        className={classes.select}
+        className={classes.spaced}
       />
       <Button
         variant="contained"
         color="primary"
-        className={classes.button}
+        className={classes.spaced}
         type="submit"
       >
         Convert

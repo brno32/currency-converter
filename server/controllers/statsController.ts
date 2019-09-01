@@ -1,6 +1,6 @@
 import express from "express";
 
-import db from "../config";
+import db, { BASE_CURRENCY } from "../config";
 
 type QuerySnapshot = import("firebase").firestore.QuerySnapshot;
 type DocumentSnapshot = import("firebase").firestore.DocumentSnapshot;
@@ -33,6 +33,7 @@ const statsController = async (req: express.Request, res: express.Response) => {
 
   res.json({
     totalAmount: totalAmount,
+    totalAmountUnit: BASE_CURRENCY,
     mostPopular: mostPopular,
     numConversions: documents.size
   });
