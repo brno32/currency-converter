@@ -7,6 +7,12 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import CurrencySelect from "./CurrencySelect";
 import ConversionContext from "../../context/conversion/conversionContext";
 
+interface FormState {
+  amount: number | null;
+  start: string | null;
+  target: string | null;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -27,36 +33,44 @@ const ConvertForm = () => {
   const { getConversions, getStats } = conversionContext;
 
   const classes = useStyles();
-  const [state, setState] = React.useState<any>({
-    amount: "",
-    start: "",
-    target: ""
+  const [state, setState] = React.useState<FormState>({
+    amount: null,
+    start: null,
+    target: null
   });
 
   const { amount, start, target } = state;
 
+  // For fetching selected value from child CurrencySelect component
   const onStartSelect = (currency: string) => {
     setState({ ...state, start: currency });
   };
 
+  // For fetching selected value from child CurrencySelect component
   const onTargetSelect = (currency: string) => {
     setState({ ...state, target: currency });
   };
 
   const onTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, amount: event.target.value });
+    setState({ ...state, amount: Number(event.target.value) });
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (start === "" || target === "") return;
+    // React Select does not support required fields
+    if (start === null || target === null) {
+      alert("Please select a start and target currency!");
+      return;
+    }
 
     getConversions({
       start: start,
       target: target,
       amount: amount
     });
+
+    // Trigger fetching of stats
     getStats();
   };
 
