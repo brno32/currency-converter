@@ -1,11 +1,16 @@
-import React from "react";
+import React, { Fragment } from "react";
+import Typography from "@material-ui/core/Typography";
 
 const About = () => {
   return (
-    <div>
-      <h1>About Currency Converter</h1>
-      <p>Surprsingly... it converts currencies!</p>
-    </div>
+    <Fragment>
+      <Typography variant="h4" component="h2">
+        About Currency Converter
+      </Typography>
+      <Typography variant="body2" component="p">
+        Surprsingly... it converts currencies!
+      </Typography>
+    </Fragment>
   );
 };
 
