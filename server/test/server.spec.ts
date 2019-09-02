@@ -46,9 +46,10 @@ describe("Express server", () => {
         if (err) {
           return done(err);
         }
-        expect(res.body.totalAmountConverted).to.exist;
-        expect(res.body.top_dest_currency).to.exist;
-        expect(res.body.total_conversions).to.exist;
+        expect(res.body.totalAmount).to.exist;
+        expect(res.body.totalAmountUnit).to.exist;
+        expect(res.body.mostPopular).to.exist;
+        expect(res.body.numConversions).to.exist;
         done();
       });
   });
@@ -81,7 +82,7 @@ describe("convertController helper methods", () => {
     expect(findCurrencyTypeErrors("USD", "CZK", { USD: 1, CZK: 23 })).to.empty;
   });
 
-  it("should not be empty if currencies to convert are in the rates", () => {
+  it("should not be empty if currencies to convert are not in the rates", () => {
     expect(findCurrencyTypeErrors("USD", "CZK", { USD: 1, CZZ: 23 })).to.not
       .empty;
   });
