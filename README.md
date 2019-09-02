@@ -8,10 +8,11 @@ Install the project with
 npm install
 ```
 
-and
+and the client dependencies with
 
 ```
-npm install-client
+cd client
+npm install
 ```
 
 ## Execution

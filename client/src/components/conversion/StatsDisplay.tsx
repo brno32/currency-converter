@@ -23,7 +23,7 @@ const StatsDisplay = () => {
     <div>
       Total converted:<span> </span>
       <strong>
-        {totalAmount.toFixed(2)} {totalAmountUnit}
+        {totalAmount && totalAmount.toFixed(2)} {totalAmountUnit}
       </strong>
       <span> | </span>
       Total number of conversion requests: <strong>{numConversions}</strong>

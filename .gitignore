@@ -55,10 +55,12 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+# Allow for demonstration purposes
+#.env
 
 # next.js build output
 .next
 
 # Ignore built ts files
 dist/**/*
+build/

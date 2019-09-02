@@ -5,12 +5,12 @@
   "main": "server.js",
   "scripts": {
     "tsc": "tsc",
-    "start": "tsc && node ./dist/server.js",
+    "start": "tsc && node ./dist/server/server.js",
     "start-dev": "ts-node-dev --respawn --transpileOnly ./server/server.ts",
     "start-client": "npm start --prefix client",
-    "install-client": "npm install --prefix client",
     "dev": "concurrently \"npm run start-dev\" \"npm run start-client\"",
-    "test": "mocha -r ts-node/register server/test/server.spec.ts  --exit"
+    "test": "mocha -r ts-node/register server/test/server.spec.ts  --exit",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
