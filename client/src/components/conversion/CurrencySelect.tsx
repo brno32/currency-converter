@@ -1,7 +1,7 @@
 import React from "react";
 import AsyncSelect from "react-select/async";
-
 import axios from "axios";
+let debounce = require("es6-promise-debounce"); // Does not have a @types library
 
 interface CurrencyOption {
   label: string;
@@ -44,7 +44,7 @@ const CurrencySelect = (props: SelectProps) => {
   return (
     <AsyncSelect
       placeholder={props.placeholder}
-      loadOptions={currencyOptions}
+      loadOptions={debounce(currencyOptions, 100)}
       onChange={onChange}
       className={props.className}
     />
