@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import EuroIcon from "@material-ui/icons/EuroSymbol";
 
-import Stats from "../conversion/Stats";
+import StatsDisplay from "../conversion/StatsDisplay";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
             Currency Converter
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            <Stats />
+            <StatsDisplay />
           </Typography>
           <Button color="inherit">
             <Link to="/about">About</Link>

@@ -7,7 +7,7 @@ import CurrencySelect from "./CurrencySelect";
 import ConversionContext, {
   Conversion
 } from "../../context/conversion/conversionContext";
-import StatsContext from "../../context/stats/statsContext";
+import StatsContext, { Stats } from "../../context/stats/statsContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +25,7 @@ const ConvertForm = () => {
   const conversionContext: Conversion = useContext(ConversionContext);
   const { getConversions } = conversionContext;
 
-  const statsContext: any = useContext(StatsContext);
+  const statsContext: Stats = useContext(StatsContext);
   const { getStats } = statsContext;
 
   const classes = useStyles();
@@ -60,7 +60,7 @@ const ConvertForm = () => {
       return;
     }
 
-    if (getConversions != undefined) {
+    if (getConversions !== undefined) {
       getConversions({
         start: start,
         target: target,
@@ -69,7 +69,9 @@ const ConvertForm = () => {
     }
 
     // Trigger fetching of stats
-    getStats();
+    if (getStats !== undefined) {
+      getStats();
+    }
   };
 
   return (

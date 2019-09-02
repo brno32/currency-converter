@@ -1,18 +1,12 @@
 import { GET_STATS } from "../types";
-
-export interface State {
-  totalAmount: number | null;
-  totalAmountUnit: string | null;
-  numConversions: number | null;
-  mostPopular: string | null;
-}
+import { Stats } from "./statsContext";
 
 type Action = {
   type: "GET_STATS";
-  payload: State;
+  payload: Stats;
 };
 
-export default (state: State, action: Action) => {
+export default (state: Stats, action: Action) => {
   switch (action.type) {
     case GET_STATS:
       return {

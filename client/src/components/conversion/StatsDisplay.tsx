@@ -1,19 +1,21 @@
 import React, { useEffect, useContext } from "react";
 
-import StatsContext from "../../context/stats/statsContext";
+import StatsContext, { Stats } from "../../context/stats/statsContext";
 
-const Stats = () => {
-  const conversionContext: any = useContext(StatsContext);
+const StatsDisplay = () => {
+  const statsContext: Stats = useContext(StatsContext);
   const {
     totalAmount,
     totalAmountUnit,
     numConversions,
     mostPopular,
     getStats
-  } = conversionContext;
+  } = statsContext;
 
   useEffect(() => {
-    getStats();
+    if (getStats !== undefined) {
+      getStats();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -31,4 +33,4 @@ const Stats = () => {
   );
 };
 
-export default Stats;
+export default StatsDisplay;

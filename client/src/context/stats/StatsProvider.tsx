@@ -1,17 +1,10 @@
 import React, { useReducer } from "react";
 import axios from "axios";
-import StatsContext from "./statsContext";
-import statsReducer, { State } from "./statsReducer";
+import StatsContext, { initialState } from "./statsContext";
+import statsReducer from "./statsReducer";
 import { GET_STATS } from "../types";
 
-const StatsState = (props: React.ComponentProps<any>) => {
-  const initialState: State = {
-    totalAmount: 0,
-    totalAmountUnit: null,
-    numConversions: 0,
-    mostPopular: null
-  };
-
+const StatsProvider = (props: React.ComponentProps<any>) => {
   const [state, dispatch] = useReducer(statsReducer, initialState);
 
   const getStats = async () => {
@@ -38,4 +31,4 @@ const StatsState = (props: React.ComponentProps<any>) => {
   );
 };
 
-export default StatsState;
+export default StatsProvider;

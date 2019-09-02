@@ -5,14 +5,14 @@ import Navbar from "./components/layout/Navbar";
 import Main from "./components/pages/Main";
 import About from "./components/pages/About";
 
-import StatsState from "./context/stats/StatsState";
+import StatsProvider from "./context/stats/StatsProvider";
 import ConversionProvider from "./context/conversion/ConversionProvider";
 
 import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <StatsState>
+    <StatsProvider>
       <ConversionProvider>
         <Router>
           <Navbar />
@@ -24,7 +24,7 @@ const App: React.FC = () => {
           </div>
         </Router>
       </ConversionProvider>
-    </StatsState>
+    </StatsProvider>
   );
 };
 
