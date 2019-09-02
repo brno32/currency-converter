@@ -1,26 +1,20 @@
 import { createContext } from "react";
 
 export interface Conversion {
-  amount: number | null;
-  start: string | null;
-  target: string | null;
-}
-
-export interface ConversionState {
-  start: string | null;
-  target: string | null;
-  amount: number | null;
-  result: number | null;
+  amount: number;
+  start: string;
+  target: string;
+  result?: number | null;
   getConversions?: (params: Conversion) => void;
 }
 
-export const initialState: ConversionState = {
-  start: null,
-  target: null,
-  amount: null,
+export const initialState: Conversion = {
+  start: "",
+  target: "",
+  amount: 0,
   result: null
 };
 
-const conversionContext = createContext<ConversionState>(initialState);
+const conversionContext = createContext<Conversion>(initialState);
 
 export default conversionContext;

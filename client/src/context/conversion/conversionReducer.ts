@@ -1,12 +1,12 @@
 import { GET_CONVERSION } from "../types";
-import { ConversionState } from "./conversionContext";
+import { Conversion } from "./conversionContext";
 
 type Action = {
   type: "GET_CONVERSION";
-  payload: ConversionState;
+  payload: Conversion;
 };
 
-export default (state: ConversionState, action: Action) => {
+export default (state: Conversion, action: Action) => {
   switch (action.type) {
     case GET_CONVERSION:
       return {

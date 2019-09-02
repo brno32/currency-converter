@@ -3,11 +3,11 @@ import Container from "@material-ui/core/Container";
 import ConvertForm from "../conversion/ConvertForm";
 import ConversionDisplay from "../conversion/ConversionDisplay";
 import ConversionContext, {
-  ConversionState
+  Conversion
 } from "../../context/conversion/conversionContext";
 
 const Main = () => {
-  const conversionContext: ConversionState = useContext(ConversionContext);
+  const conversionContext: Conversion = useContext(ConversionContext);
   const { result } = conversionContext;
 
   return (

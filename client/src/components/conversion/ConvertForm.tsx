@@ -5,15 +5,9 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 import CurrencySelect from "./CurrencySelect";
 import ConversionContext, {
-  ConversionState
+  Conversion
 } from "../../context/conversion/conversionContext";
 import StatsContext from "../../context/stats/statsContext";
-
-interface FormState {
-  amount: number | null;
-  start: string | null;
-  target: string | null;
-}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,17 +22,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ConvertForm = () => {
-  const conversionContext: ConversionState = useContext(ConversionContext);
+  const conversionContext: Conversion = useContext(ConversionContext);
   const { getConversions } = conversionContext;
 
   const statsContext: any = useContext(StatsContext);
   const { getStats } = statsContext;
 
   const classes = useStyles();
-  const [state, setState] = React.useState<FormState>({
-    amount: null,
-    start: null,
-    target: null
+  const [state, setState] = React.useState<Conversion>({
+    amount: 0,
+    start: "",
+    target: ""
   });
 
   const { amount, start, target } = state;
@@ -61,7 +55,7 @@ const ConvertForm = () => {
     e.preventDefault();
 
     // React Select does not support required fields
-    if (start === null || target === null) {
+    if (start === "" || target === "") {
       alert("Please select a start and target currency!");
       return;
     }
