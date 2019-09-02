@@ -1,5 +1,7 @@
 # currency-converter
 
+Visit a live instance of this project [here](https://limitless-river-35973.herokuapp.com/)
+
 ## Installation
 
 Install the project with
