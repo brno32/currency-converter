@@ -80,6 +80,7 @@ const ConvertForm = () => {
         required
         label="Amount"
         type="number"
+        inputProps={{ min: ".01", step: ".01" }}
         className={classes.spaced}
         onChange={onTextChange}
       ></TextField>
