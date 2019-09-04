@@ -1,4 +1,5 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, Fragment } from "react";
+import Typography from "@material-ui/core/Typography";
 
 import StatsContext, { Stats } from "../../context/stats/statsContext";
 
@@ -20,7 +21,7 @@ const StatsDisplay = () => {
   }, []);
 
   return (
-    <div>
+    <Fragment>
       Total converted:<span> </span>
       <strong>
         {totalAmount && totalAmount.toFixed(2)} {totalAmountUnit}
@@ -29,7 +30,7 @@ const StatsDisplay = () => {
       Total number of conversion requests: <strong>{numConversions}</strong>
       <span> | </span>
       Most popular target currency: <strong>{mostPopular}</strong>
-    </div>
+    </Fragment>
   );
 };
 
