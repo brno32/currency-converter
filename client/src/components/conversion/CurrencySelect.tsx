@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AsyncSelect from "react-select/async";
 import axios from "axios";
-let debounce = require("es6-promise-debounce"); // Does not have a @types library
 
 interface CurrencyOption {
   label: string;
@@ -16,35 +15,54 @@ interface SelectProps {
 
 const currenciesEndpoint = "https://openexchangerates.org/api/currencies.json";
 
+// Reusable function for matching options against user input
+const matches = (text: string, input: string): boolean => {
+  return text.toLowerCase().includes(input.toLowerCase());
+};
+
 const CurrencySelect = (props: SelectProps) => {
-  // Filter results from API based on user input
-  // Inefficient since ALL results are in the response, but openexchange doesn't support pagination or query params
-  const currencyOptions = async (inputValue: string) => {
+  let [options, setOptions] = useState<CurrencyOption[]>([]);
+
+  useEffect(() => {
+    fetchOptions();
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchOptions = async () => {
     const results = await axios.get(currenciesEndpoint);
 
     let options: CurrencyOption[] = [];
     for (let currency in results.data) {
       options.push({
         value: currency,
-        label: results.data[currency]
+        label: `${results.data[currency]} (${currency})` // Users will expect to also see code
       });
     }
+    setOptions(options);
+  };
 
+  // Called when user types
+  const filterOptions = async (
+    inputValue: string
+  ): Promise<CurrencyOption[]> => {
     return options.filter((country: CurrencyOption) => {
-      return country.label.toLowerCase().includes(inputValue.toLowerCase());
+      // Value is the currency code, label is the name. Allow both
+      return (
+        matches(country.label, inputValue) || matches(country.value, inputValue)
+      );
     });
   };
 
   // Send chosen value up to parent through callback
   const onChange = (selectedOption: any) => {
-    if (selectedOption == null) return;
     props.onSelect(selectedOption.value);
   };
 
   return (
     <AsyncSelect
+      defaultOptions={options}
       placeholder={props.placeholder}
-      loadOptions={debounce(currencyOptions, 100)}
+      loadOptions={filterOptions}
       onChange={onChange}
       className={props.className}
     />

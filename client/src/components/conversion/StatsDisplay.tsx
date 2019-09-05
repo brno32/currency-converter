@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, Fragment } from "react";
-import Typography from "@material-ui/core/Typography";
 
 import StatsContext, { Stats } from "../../context/stats/statsContext";
 
