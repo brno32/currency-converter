@@ -85,12 +85,12 @@ const ConvertForm = () => {
         onChange={onTextChange}
       ></TextField>
       <CurrencySelect
-        placeholder="Starting currency"
+        label="Starting currency"
         onSelect={onStartSelect}
         className={classes.spaced}
       />
       <CurrencySelect
-        placeholder="Target currency"
+        label="Target currency"
         onSelect={onTargetSelect}
         className={classes.spaced}
       />
