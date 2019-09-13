@@ -1,4 +1,7 @@
-import React, { useEffect, useContext, Fragment } from "react";
+import React, { useEffect, useContext } from "react";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
 import StatsContext, { Stats } from "../../context/stats/statsContext";
 
@@ -20,16 +23,22 @@ const StatsDisplay = () => {
   }, []);
 
   return (
-    <Fragment>
-      Total converted:<span> </span>
-      <strong>
-        {totalAmount && totalAmount.toFixed(2)} {totalAmountUnit}
-      </strong>
-      <span> | </span>
-      Total number of conversion requests: <strong>{numConversions}</strong>
-      <span> | </span>
-      Most popular target currency: <strong>{mostPopular}</strong>
-    </Fragment>
+    <Card>
+      <CardContent>
+        <Typography variant="h6" component="p">
+          Total converted:<span> </span>
+          <strong>
+            {totalAmount && totalAmount.toFixed(2)} {totalAmountUnit}
+          </strong>
+        </Typography>
+        <Typography variant="h6" component="p">
+          Total conversion requests: <strong>{numConversions}</strong>
+        </Typography>
+        <Typography variant="h6" component="p">
+          Top target currency: <strong>{mostPopular}</strong>
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 

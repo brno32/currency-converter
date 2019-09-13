@@ -7,9 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import EuroIcon from "@material-ui/icons/EuroSymbol";
-import MediaQuery from "react-responsive";
-
-import StatsDisplay from "../conversion/StatsDisplay";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,11 +40,6 @@ const Navbar: React.FC = () => {
           <Typography variant="h6" className={classes.title}>
             Currency Converter
           </Typography>
-          <MediaQuery minDeviceWidth={1224}>
-            <Typography variant="h6" className={classes.title}>
-              <StatsDisplay />
-            </Typography>
-          </MediaQuery>
           <Button color="inherit">
             <Link to="/about">About</Link>
           </Button>
